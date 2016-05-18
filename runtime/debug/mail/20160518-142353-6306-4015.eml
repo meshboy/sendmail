@@ -1,0 +1,24 @@
+Message-ID: <c26a33dce08eb0c14b8306b0d0e5db59@localhost>
+Date: Wed, 18 May 2016 14:23:53 +0000
+Subject: Message subject
+From: meshileyaseun@gmail.com
+Reply-To: meshileyaseun@gmail.com
+To: meshileyaseun@gmail.com
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="_=_swift_v4_1463581433_d7d3d4464ea5e9a87b105cd35fc89ffa_=_"
+
+
+--_=_swift_v4_1463581433_d7d3d4464ea5e9a87b105cd35fc89ffa_=_
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Plain text content
+
+--_=_swift_v4_1463581433_d7d3d4464ea5e9a87b105cd35fc89ffa_=_
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<b>HTML content</b>
+
+--_=_swift_v4_1463581433_d7d3d4464ea5e9a87b105cd35fc89ffa_=_--
