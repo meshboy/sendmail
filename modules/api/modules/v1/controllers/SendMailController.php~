@@ -1,0 +1,107 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: root
+ * Date: 5/18/16
+ * Time: 2:40 PM
+ */
+
+namespace app\modules\api\modules\v1\controllers;
+
+
+use app\modules\api\common\models\ApiUtility;
+use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use Yii;
+
+class SendMailController extends BaseController{
+
+    public function behaviors()
+    {
+        return ArrayHelper::merge(parent::behaviors(), [
+
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'send' => ['POST'],
+
+                ],
+            ],
+        ]);
+    }
+
+    public function actionSend(){
+
+        $status = false;
+
+        $output_message = "";
+
+        $ACCESS_TOKEN = "access_token";
+
+        $params = $_REQUEST;
+
+        $access_token = $ACCESS_TOKEN;
+
+        $paramsValuePair = [
+            "name" => ApiUtility::TYPE_STRING,
+            "message" => ApiUtility::TYPE_STRING,
+            "subject" => ApiUtility::TYPE_STRING,
+            "email" => ApiUtility::TYPE_STRING,
+
+        ];
+
+        $this->paramCheck($paramsValuePair, $params);
+
+        $name = $params["name"];
+        $message = $params["message"];
+        $subject = $params["subject"];
+        $email = $params["email"];
+
+        if(empty($name))
+        {
+            $output_message = "please name is required";
+        }
+        else if(empty($message))
+        {
+            $output_message = "pleae message is required";
+        }
+        else if (empty($subject))
+        {
+            $output_message = "please subject is required";
+        }
+        else if(empty($email))
+        {
+            $output_message = "please email is required";
+        }
+        else{
+
+            $result = Yii::$app->mailer->compose()
+                ->setFrom($email)
+                ->setTo('meshileyaseun@gmail.com')
+                ->setReplyTo('meshileyaseun@gmail.com')
+                ->setSubject($subject)
+                ->setTextBody("From ".$name."\n".$message)
+                ->setHtmlBody('<b>HTML content</b>')
+                ->send();
+
+            if ($result)
+            {
+               $output_message = "Your message has been sent. Thank you";
+
+                $status = true;
+            }
+            else{
+                $output_message = "Something went wrong. Please, try again";
+
+
+            }
+
+        }
+
+        return [
+            "status" => $status,
+            "data" => $output_message
+        ];
+    }
+
+} 
